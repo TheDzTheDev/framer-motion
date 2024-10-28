@@ -9,13 +9,21 @@ export const Route = createRootRoute({
 
 function Root() {
   const [rootShow, setRootShow] = useState(false);
-  
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setRootShow(true);
-    }, 7000);
 
-    return () => clearTimeout(timeoutId);
+  useEffect(() => {
+    // Check local storage to see if the root has already been shown
+    const hasShownRoot = localStorage.getItem('rootShown');
+
+    if (!hasShownRoot) {
+      const timeoutId = setTimeout(() => {
+        setRootShow(true);
+        localStorage.setItem('rootShown', 'true'); // Mark it as shown
+      }, 7000);
+
+      return () => clearTimeout(timeoutId);
+    } else {
+      setRootShow(true); // Show it immediately if already shown
+    }
   }, []);
 
   const pageVariants = {
@@ -25,23 +33,23 @@ function Root() {
 
   return (
     <>
-          <div className='p-4 text-lg flex justify-between bg-[#ECE8E1] font-chivo'>
-          {rootShow && 
+      <div className='p-4 text-lg flex justify-between bg-[#ECE8E1] font-chivo'>
+        {rootShow && 
           <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={pageVariants}>
+            initial="hidden"
+            animate="visible"
+            variants={pageVariants}>
             <div className='flex items-center justify-center gap-[14px] text-[30px]'>
               <img src={logo} className='w-[66px] h-[50px]' />
               <p>dz.dev</p>
             </div>
           </motion.div>
-          }    
-      {rootShow && (
-        <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={pageVariants}>
+        }    
+        {rootShow && (
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={pageVariants}>
             <div className='flex gap-[92px] mr-4 mt-4'>
               <Link to="/" className="[&.active]:font-bold">
                 Home
@@ -58,11 +66,11 @@ function Root() {
             </div>
           </motion.div>
         )}
-          </div>
-          <hr />
-          <div className="bg-[#ECE8E1] min-h-screen flex flex-col">
-            <Outlet />
-          </div>
+      </div>
+      <hr />
+      <div className="bg-[#ECE8E1] min-h-screen flex flex-col">
+        <Outlet />
+      </div>
     </>
   );
 }
