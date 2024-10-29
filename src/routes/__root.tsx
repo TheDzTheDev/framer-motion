@@ -17,12 +17,12 @@ function Root() {
     if (!hasShownRoot) {
       const timeoutId = setTimeout(() => {
         setRootShow(true);
-        localStorage.setItem('rootShown', 'true'); // Mark it as shown
+        localStorage.setItem('rootShown', 'true');
       }, 7000);
 
       return () => clearTimeout(timeoutId);
     } else {
-      setRootShow(true); // Show it immediately if already shown
+      setRootShow(true);
     }
   }, []);
 

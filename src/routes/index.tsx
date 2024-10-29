@@ -98,10 +98,10 @@ function Index() {
           <div className="flex items-center justify-center mt-[15rem]">
           <div className={`transition-opacity duration-1000 ease-in-out relative w-full h-full flex flex-col items-center justify-center`}>
           <div className='font-poppins tracking-wider font-semibold z-10 text-center mb-[15rem]'>
-                <p className={`transition-opacity duration-1000 ease-in-out text-black font-bold text-[54px] ${
+                <p className={`transition-opacity font-chivo duration-1000 ease-in-out text-black font-bold text-[54px] ${
               isVisible ? 'opacity-100' : 'opacity-0'
             }`}>Opportunity knocks only once</p>
-                <p className={`transition-opacity duration-1000 ease-in-out text-black font-bold text-[54px] ${
+                <p className={`transition-opacity duration-1000 font-chivo ease-in-out text-black font-bold text-[54px] ${
               isVisibleTwo ? 'opacity-100' : 'opacity-0'
             }`}>it's now or never.</p>
             </div>
